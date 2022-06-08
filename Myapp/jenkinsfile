@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+        stages {
+            stage('Pull') {
+                steps{
+                    script{
+                        checkout([$class: 'GitSCM',
+                        branches: [[name: '*/main']],
+                            userRemoteConfigs: [[
+                                credentialsId: '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',
+                                url: 'https://github.com/naoufelmhadhbi/lab1.git'
+                            ]]])
+                    }
+                }
+            }
+            stage('Build') {
+                steps{
+                    script{
+                        sh "ansible-playbook Myapp/ansible/build.yml -i Myapp/ansible/inventory/host.yml"
+                    }
+                }
+            }
+            stage('docker') {
+                steps{
+                    script{
+                        sh "ansible-playbook Myapp/ansible/docker.yml -i Myapp/ansible/inventory/host.yml"
+                    }
+                }
+            }
+            stage('docker-registry') {
+                steps{
+                    script{
+                        sh "ansible-playbook Myapp/ansible/docker-registry.yml -i Myapp/ansible/inventory/host.yml"
+                    }
+                }
+            }
+        }
+}

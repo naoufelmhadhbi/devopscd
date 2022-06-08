@@ -1,0 +1,10 @@
+---
+# tasks file for docker
+- name: Tag and push to docker hub
+  command: docker push naoufeldocker/devopscd
+  #docker_image:
+    #name: naoufeldocker/devopscd
+    #repository: naoufeldocker/devopscd
+    #push: yes
+    #source: local
+    #force: yes
