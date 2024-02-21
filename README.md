@@ -1,1 +1,1 @@
-# lab1
+- Ce projet consiste à déployer automatiquement une application Angular en utilisant: Jenkins, des rôles Ansible et Docker.
